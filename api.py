@@ -53,35 +53,6 @@ def api():
     api = {"jsonarray":[api]}
     return jsonify(api)
 
-@app.route('/rank', methods=['GET'])
-def rank():
-    db = pymysql.connect(host='localhost', port=3306, user='ian1234280', passwd='User.-.0987', db='Dodge', charset='utf8')
-    cursor = db.cursor()
-    sql = "SELECT * FROM data"
-    cursor.execute(sql)
-    data = cursor.fetchall()
-    db.close()
-    # api = dict(zip(date,count))
-    # api = {"jsonarray":[api]}
-    # print(type(data))
-    # data = map(str,data)
-    x = ""
-    name = []
-    country = []
-    city = []
-    rank = []
-    api = {}
-    for i in data:
-        name.append(i[0])
-        country.append(i[1])
-        city.append(i[2])
-        rank.append(i[3])
-        id ={"name":i[0],"country":i[1],"city":i[2],"rank":i[3]}
-        api.update({i[0]:id})
-    # api = {"name":name,"country":country,"city":city,"rank":rank}
-    # api = {"jsonarray":[api]}
-    return jsonify(api)
-
 @app.route('/ip/<ip>/<string:path>/', methods=['GET'])
 def ip(ip,path):
     ips = 'http://ip-api.com/json/'+ ip +'?lang=zh-CN&fields=status,message,continent,country,regionName,city,isp,org,reverse,mobile,proxy,hosting,query'
